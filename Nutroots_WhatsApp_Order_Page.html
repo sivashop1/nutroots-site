@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutroots Order</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #fffef5; color: #333; }
+    h1 { color: #4caf50; }
+    .product { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 10px; }
+    label { display: block; margin: 5px 0; }
+    input[type='number'] { width: 60px; padding: 5px; }
+    #orderBtn { margin-top: 20px; padding: 10px 20px; font-size: 16px; background-color: #4caf50; color: white; border: none; border-radius: 8px; cursor: pointer; }
+    #orderBtn:hover { background-color: #388e3c; }
+  </style>
+</head>
+<body>
+  <h1>Nutroots WhatsApp Order</h1>
+
+  <div class="product">
+    <label>Almonds (₹500 / 500g)</label>
+    Quantity: <input type="number" id="almonds" min="0" value="0">
+  </div>
+
+  <div class="product">
+    <label>Cashews (₹450 / 500g)</label>
+    Quantity: <input type="number" id="cashews" min="0" value="0">
+  </div>
+
+  <div class="product">
+    <label>Raisins (₹300 / 500g)</label>
+    Quantity: <input type="number" id="raisins" min="0" value="0">
+  </div>
+
+  <div class="product">
+    <label>Dates (₹350 / 500g)</label>
+    Quantity: <input type="number" id="dates" min="0" value="0">
+  </div>
+
+  <button id="orderBtn">Send Order via WhatsApp</button>
+
+  <script>
+    document.getElementById("orderBtn").addEventListener("click", function() {
+      const almondQty = parseInt(document.getElementById("almonds").value);
+      const cashewQty = parseInt(document.getElementById("cashews").value);
+      const raisinQty = parseInt(document.getElementById("raisins").value);
+      const dateQty = parseInt(document.getElementById("dates").value);
+
+      let total = 0;
+      let message = "Hello Nutroots! I want to order:%0A";
+
+      if (almondQty > 0) {
+        total += almondQty * 500;
+        message += `- Almonds 500g x${almondQty}%0A`;
+      }
+      if (cashewQty > 0) {
+        total += cashewQty * 450;
+        message += `- Cashews 500g x${cashewQty}%0A`;
+      }
+      if (raisinQty > 0) {
+        total += raisinQty * 300;
+        message += `- Raisins 500g x${raisinQty}%0A`;
+      }
+      if (dateQty > 0) {
+        total += dateQty * 350;
+        message += `- Dates 500g x${dateQty}%0A`;
+      }
+
+      message += `Total: ₹${total}`;
+      const phone = "91XXXXXXXXXX"; // replace with your WhatsApp number
+      const url = `https://wa.me/${phone}?text=${message}`;
+      window.open(url, '_blank');
+    });
+  </script>
+</body>
+</html>
